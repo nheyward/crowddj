@@ -6,6 +6,6 @@ class Venue < ActiveRecord::Base
  #   user_id
   belongs_to :user
   
-  validates :name, :postocde, presence => true
+  validates :name, :postcode, presence => true
  
 end
