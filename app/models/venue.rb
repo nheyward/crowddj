@@ -4,8 +4,9 @@ class Venue < ActiveRecord::Base
  #   postcode
  #   website
  #   user_id
+ 
   belongs_to :user
   
-  validates :name, :postcode, presence => true
+  validates :name, :postcode, :presence => true
  
 end
