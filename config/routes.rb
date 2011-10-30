@@ -1,4 +1,8 @@
 Crowddj::Application.routes.draw do
+  get "pages/home"
+  get "pages/about"
+  get "pages/contact"
+
   resources :venues
 
   resources :users
