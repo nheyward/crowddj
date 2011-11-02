@@ -1,0 +1,13 @@
+<!-- Header section of main web pages -->
+<header>
+    <% logo = image_tag("rails.png", :alt => "Sample App", :class => "round") %>
+	<%= link_to logo, root_path %>
+
+    <nav class="round">
+      <ul>
+		<li><%= link_to "Search Venues", venues_path %></li>
+        <li><%= link_to "Sign-in / Register", signup_path %></li>
+		<li><%= link_to "About", about_path %></li>
+      </ul>
+    </nav>
+</header>
