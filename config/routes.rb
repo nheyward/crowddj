@@ -1,5 +1,6 @@
 Crowddj::Application.routes.draw do
-
+  get "log_in" => "sessions#new", :as => "log_in"
+  get "log_out" => "sessions#destroy", :as => "log_out"
   root :to => 'pages#home'
   
   match '/contact', :to => 'pages#contact'
@@ -7,7 +8,7 @@ Crowddj::Application.routes.draw do
   match '/signup',  :to => 'users#new'
   
   resources :venues
-
+  resources :sessions
   resources :users
 
   # The priority is based upon order of creation:

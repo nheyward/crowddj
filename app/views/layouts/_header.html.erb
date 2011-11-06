@@ -6,7 +6,11 @@
     <nav class="round">
       <ul>
 		<li><%= link_to "Search Venues", venues_path %></li>
-        <li><%= link_to "Sign-in / Register", signup_path %></li>
+        <% if current_user %>
+			<li>Logged in as <%= link_to current_user.name, current_user %>. <%= link_to "Log Out", log_out_path %></li>
+		<% else %>
+			<li><%= link_to "Sign-in", log_in_path %> or <%= link_to "Register", signup_path %></li>
+		<% end %>
 		<li><%= link_to "About", about_path %></li>
       </ul>
     </nav>

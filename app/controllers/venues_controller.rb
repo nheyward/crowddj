@@ -1,4 +1,6 @@
 class VenuesController < ApplicationController
+  before_filter :check_signed_in, :only => [:new, :create, :destroy]
+  
   # GET /venues
   # GET /venues.xml
   def index
@@ -24,8 +26,8 @@ class VenuesController < ApplicationController
   # GET /venues/new
   # GET /venues/new.xml
   def new
-    @venue = Venue.new
-
+    @venue = Venue.new(:user_id => current_user.id )
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @venue }
@@ -72,12 +74,24 @@ class VenuesController < ApplicationController
   # DELETE /venues/1
   # DELETE /venues/1.xml
   def destroy
-    @venue = Venue.find(params[:id])
-    @venue.destroy
-
+     venue = Venue.find(params[:id])
+     venue.destroy
+    flash[:success] = "Venue deleted"
     respond_to do |format|
       format.html { redirect_to(venues_url) }
       format.xml  { head :ok }
     end
   end
+  
+  
+  
+  private
+  
+  def check_signed_in
+    if current_user == nil
+      flash[:notice] = "Log in to add a venue"
+      redirect_to log_in_path
+    end 
+  end
+  
 end

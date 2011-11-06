@@ -13,8 +13,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
+    @title = "Profile"
     @user = User.find(params[:id])
-
+    @venues = @user.venues
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
@@ -27,10 +28,6 @@ class UsersController < ApplicationController
     @title = "Sign-In or Register"
     @user = User.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @user }
-    end
   end
 
   # GET /users/1/edit
@@ -45,6 +42,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        sign_in @user
         format.html { redirect_to(@user, :notice => 'User was successfully created.') }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
@@ -73,11 +71,12 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
+    @usertogo = User.find(params[:id])
+    @usertogo.destroy
+  
     respond_to do |format|
-      format.html { redirect_to(users_url) }
+      flash[:success] = "User destroyed."
+      format.html { redirect_to(root_url) }
       format.xml  { head :ok }
     end
   end

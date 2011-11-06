@@ -38,5 +38,11 @@ module Crowddj
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    
+    #Entered as per suggestion from Devise authentication plugin.. but removed as it was causing an error!
+    #config.assets.initialize_on_precompile = false
+    #Suggested fix as per Railscast 209 for Devise
+    config.secret_token = 'd5c25db339a581e3e88411570ee444229bf6b14c9f59116510d4b8b9226b17bf73d973c0897fc70dda932d1e5b33e4ef467eddc7e9bdfaa94a3709655115058d'
+
   end
 end

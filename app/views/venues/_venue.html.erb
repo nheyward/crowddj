@@ -1,0 +1,12 @@
+<tr>
+<td class="venue">
+   <%= venue.name %>, <%= venue.postcode %>
+	<%= venue.website %>
+</td>
+
+<td>
+<% if current_user == @user %>
+	<%= link_to 'Edit', edit_venue_path(venue) %>
+<% end %>
+</td>
+</tr>

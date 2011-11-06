@@ -1,15 +1,22 @@
-<p id="notice"><%= notice %></p>
+<table>
 
-<p>
-  <b>Name:</b>
+<tr>
+<td>
+	<h2>Venues for <%= @user.name %>:</h2>
+	<table><%= render @venues %></table>
+</td>
+
+<td><b>Name:</b>
   <%= @user.name %>
-</p>
-
-<p>
   <b>Email:</b>
   <%= @user.email %>
-</p>
+</td>
+</tr>
 
+</table>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+<% if current_user == @user %>
+	<%= link_to 'Edit', edit_user_path(@user) %> |
+	<%= link_to 'Create Venue', new_venue_path %>
+<% end %>
