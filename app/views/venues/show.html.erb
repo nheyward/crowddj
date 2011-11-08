@@ -1,24 +1,16 @@
-<p>
-  <b>Name:</b>
-  <%= @venue.name %>
-</p>
+<table>
+<tr>
+<td><%= image_tag("rails.png", :alt => "Venue photo", :class => "round") %></td>
+<td>
+	<h1><%= @venue.name %></h1>
+	<%= @venue.website %><br />
+	<%= @venue.postcode %>
+</td>
+</tr>
 
-<p>
-  <b>Postcode:</b>
-  <%= @venue.postcode %>
-</p>
+</table>
 
-<p>
-  <b>Website:</b>
-  <%= @venue.website %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @venue.user_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_venue_path(@venue) %> |
-<%= link_to 'Back', venues_path %> |
-<%= link_to 'Delete', @venue, :method => :delete %>
+<% if current_user == @venue.user %>
+	<%= link_to 'Edit', edit_venue_path(@venue) %> |
+	<%= link_to 'Delete', @venue, :method => :delete %>
+<% end %>

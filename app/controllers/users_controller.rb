@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_filter :authenticate, :only => [:edit, :update]
+  before_filter :admin_user,   :only => :destroy
+  
   # GET /users
   # GET /users.xml
   def index
@@ -32,7 +35,8 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id]) - Now defined in authentucate function
+    @title = "Edit Profile"
   end
 
   # POST /users
@@ -55,13 +59,13 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    @user = User.find(params[:id])
-
+    #  @user = User.find(params[:id]) - Now defined in authenticate function
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else
+        @title = "Edit Profile"
         format.html { render :action => "edit" }
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
@@ -80,4 +84,21 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  
+  
+  private
+  
+  def authenticate
+    @user = User.find(params[:id])
+    if current_user != @user
+      flash[:notice] = "Please sign-in as the right user to edit details"
+      deny_access
+    end
+  end
+  
+   def admin_user
+      redirect_to(root_path) unless current_user.admin?
+   end
+    
 end

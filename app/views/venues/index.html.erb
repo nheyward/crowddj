@@ -1,27 +1,9 @@
 <h1>Listing venues</h1>
 
 <table>
-  <tr>
-    <th>Name</th>
-    <th>Postcode</th>
-    <th>Website</th>
-    <th>User</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
 
-<% @venues.each do |venue| %>
-  <tr>
-    <td><%= venue.name %></td>
-    <td><%= venue.postcode %></td>
-    <td><%= venue.website %></td>
-    <td><%= venue.user_id %></td>
-    <td><%= link_to 'Show', venue %></td>
-    <td><%= link_to 'Edit', edit_venue_path(venue) %></td>
-    <td><%= link_to 'Destroy', venue, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+<%= render @venues %>
+
 </table>
 
 <br />

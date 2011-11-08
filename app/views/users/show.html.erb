@@ -2,21 +2,24 @@
 
 <tr>
 <td>
-	<h2>Venues for <%= @user.name %>:</h2>
+	<h2>Profile for <%= @user.name %>:</h2>
 	<table><%= render @venues %></table>
 </td>
 
-<td><b>Name:</b>
+<td>
+  <b>Name:</b>
   <%= @user.name %>
   <b>Email:</b>
-  <%= @user.email %>
+  <%= @user.email %><br/>
+	<% if current_user == @user %>
+		<%= link_to 'Edit Profile', edit_user_path(@user) %>
+	<% end %>
 </td>
 </tr>
 
 </table>
 
-<%= link_to 'Back', users_path %>
+
 <% if current_user == @user %>
-	<%= link_to 'Edit', edit_user_path(@user) %> |
 	<%= link_to 'Create Venue', new_venue_path %>
 <% end %>

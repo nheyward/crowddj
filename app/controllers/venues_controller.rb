@@ -1,6 +1,6 @@
 class VenuesController < ApplicationController
-  before_filter :check_signed_in, :only => [:new, :create, :destroy]
-  
+  before_filter :check_signed_in, :only => [:new, :create]
+  before_filter :authenticate, :only => [:edit, :update, :destroy]
   # GET /venues
   # GET /venues.xml
   def index
@@ -26,6 +26,7 @@ class VenuesController < ApplicationController
   # GET /venues/new
   # GET /venues/new.xml
   def new
+    @title = "Add Venue"
     @venue = Venue.new(:user_id => current_user.id )
     
     respond_to do |format|
@@ -36,7 +37,7 @@ class VenuesController < ApplicationController
 
   # GET /venues/1/edit
   def edit
-    @venue = Venue.find(params[:id])
+    @title = "Update Venue"
   end
 
   # POST /venues
@@ -58,8 +59,6 @@ class VenuesController < ApplicationController
   # PUT /venues/1
   # PUT /venues/1.xml
   def update
-    @venue = Venue.find(params[:id])
-
     respond_to do |format|
       if @venue.update_attributes(params[:venue])
         format.html { redirect_to(@venue, :notice => 'Venue was successfully updated.') }
@@ -74,8 +73,7 @@ class VenuesController < ApplicationController
   # DELETE /venues/1
   # DELETE /venues/1.xml
   def destroy
-     venue = Venue.find(params[:id])
-     venue.destroy
+     @venue.destroy
     flash[:success] = "Venue deleted"
     respond_to do |format|
       format.html { redirect_to(venues_url) }
@@ -90,8 +88,16 @@ class VenuesController < ApplicationController
   def check_signed_in
     if current_user == nil
       flash[:notice] = "Log in to add a venue"
-      redirect_to log_in_path
+      deny_access
     end 
   end
   
+  def authenticate
+    @venue = Venue.find(params[:id])
+    @user = @venue.user
+    if current_user != @user
+      flash[:notice] = "You must be logged in as the right user to edit venues"
+      deny_access
+    end
+  end
 end
