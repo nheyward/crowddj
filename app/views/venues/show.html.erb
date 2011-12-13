@@ -1,10 +1,11 @@
 <table>
 <tr>
-<td><%= image_tag("rails.png", :alt => "Venue photo", :class => "round") %></td>
+<td><%= image_tag @venue.image.url, :size => "150x150", :alt => "Venue image", :class => "round" %></td>
 <td>
 	<h1><%= @venue.name %></h1>
 	<%= @venue.website %><br />
-	<%= @venue.postcode %>
+	<%= @venue.postcode %><br />
+	Profile for <%= link_to @venue.user.name, @venue.user %>
 </td>
 </tr>
 

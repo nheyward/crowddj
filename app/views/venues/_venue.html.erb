@@ -1,5 +1,5 @@
 <tr>
-<td><%= image_tag("rails.png", :width=> 30, :height => 30, :alt => "Sample App", :class => "round") %>
+<td><%= image_tag venue.image.url, :size => "50x50", :alt => "Venue image", :class => "round" %></td>
 <td><%= link_to venue.name, venue_path(venue) %>, <%= venue.postcode %></td>
 <td><%= venue.website %></td>
 
@@ -7,7 +7,7 @@
 <td>
 <% if current_user == venue.user %>
 	<%= link_to 'Edit', edit_venue_path(venue) %> |
-	<%= link_to 'Delete', :method => :delete %>
+	<%= link_to 'Delete', venue, :method => :delete %>
 <% end %>
 </td>
 </tr>

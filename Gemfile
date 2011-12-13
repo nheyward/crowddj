@@ -9,6 +9,8 @@ gem 'devise', '1.4.9'
 
 gem 'sqlite3', '1.3.3'
 
+gem 'paperclip', '2.4'
+
 group :development do
   gem 'rspec-rails', '2.6.1'
   gem 'webrat'  #Needed for RSpec test examples...

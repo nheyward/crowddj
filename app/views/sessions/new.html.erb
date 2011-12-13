@@ -9,5 +9,6 @@
 		<%= label_tag :password %><br/>
 		<%= password_field_tag :password, params[:password] %>
 	</p>
-<p class="button"><%= submit_tag %></p>
+<p class="button"><%= submit_tag 'Log me in'%></p>
+<p>Not yet registered? <%= link_to 'Register now', signup_path %></p>
 <% end %>
