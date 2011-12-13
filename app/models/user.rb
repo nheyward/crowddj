@@ -1,12 +1,14 @@
 class User < ActiveRecord::Base
+  
+  has_many :venues, :dependent => :destroy
+  
   #Set which attributes can be set by mass assignment for securty..
   attr_accessible :name, :email, :password, :password_confirmation
-  #PAssword and confirmation are not in the database, so need to add these:
+  #Set attributes that arent part of the DB model - Password and confirmation are not in the database, so need to add these:
   attr_accessor :password
   validates_confirmation_of :password
   
   before_save :encrypt_password
-  has_many :venues
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, :presence => true,

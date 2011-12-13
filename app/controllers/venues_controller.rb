@@ -27,7 +27,7 @@ class VenuesController < ApplicationController
   # GET /venues/new.xml
   def new
     @title = "Add Venue"
-    @venue = Venue.new(:user_id => current_user.id )
+    @venue = current_user.venues.build(params[:venue])
     
     respond_to do |format|
       format.html # new.html.erb
@@ -43,7 +43,7 @@ class VenuesController < ApplicationController
   # POST /venues
   # POST /venues.xml
   def create
-    @venue = Venue.new(params[:venue])
+    @venue = current_user.venues.build(params[:venue])
 
     respond_to do |format|
       if @venue.save

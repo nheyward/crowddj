@@ -3,7 +3,9 @@
 <tr>
 <td>
 	<h2>Profile for <%= @user.name %>:</h2>
-	<table><%= render @venues %></table>
+	<% unless @user.venues.empty? %>
+		<table><%= render @venues %></table>
+	<% end %>
 </td>
 
 <td>

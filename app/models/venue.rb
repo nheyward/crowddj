@@ -4,6 +4,7 @@ class Venue < ActiveRecord::Base
  #   postcode
  #   website
  #   user_id
+  attr_accessible :name, :postcode, :website
  
   belongs_to :user
   
