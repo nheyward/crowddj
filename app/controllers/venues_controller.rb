@@ -5,7 +5,11 @@ class VenuesController < ApplicationController
   # GET /venues.xml
   def index
     @venues = Venue.all
-
+    @json = Venue.all.to_gmaps4rails do |venue, marker|
+      marker.infowindow render_to_string(:partial => "/venues/venue_mapinfo", :locals => { :venue => venue}).gsub(/\n/, '').gsub(/"/, '\"')
+      marker.json "\"id\": #{venue.id}"
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @venues }

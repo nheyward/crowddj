@@ -6,6 +6,7 @@
     <%= csrf_meta_tag %>
 	<%= render 'layouts/stylesheets' %>
 	<%= javascript_include_tag :defaults %>
+	<%= yield :head %> <!-- Needed for Gmaps gem -->
   </head>
 
   <body>
@@ -20,6 +21,7 @@
        	<% end %>
 
         <%= yield %>
+		<%= yield :scripts %> <!-- Needed for Google Mpas gem -->
       </section>
 
 	  <%= render 'layouts/footer' %>
