@@ -1,17 +1,21 @@
-<table>
-<tr>
-<td><%= image_tag @venue.image.url, :size => "150x150", :alt => "Venue image", :class => "round" %></td>
-<td>
+<div class="container">
+<div class="span-6">
+<%= image_tag @venue.image.url, :size => "150x150", :alt => "Venue image", :class => "round" %>
+</div>
+
+<div class="span-12 last">
 	<h1><%= @venue.name %></h1>
 	<%= @venue.website %><br />
+	<%= @venue.town %><br />
 	<%= @venue.postcode %><br />
 	Profile for <%= link_to @venue.user.name, @venue.user %>
-</td>
-</tr>
-
-</table>
+</div>
 
 <% if current_user == @venue.user %>
+	<div class="span-24 clearfix">
 	<%= link_to 'Edit', edit_venue_path(@venue) %> |
 	<%= link_to 'Delete', @venue, :method => :delete %>
+	</div>
 <% end %>
+
+</div>

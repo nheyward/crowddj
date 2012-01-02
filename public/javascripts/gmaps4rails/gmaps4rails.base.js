@@ -38,7 +38,7 @@
         center_latitude: 0,
         center_longitude: 0,
         zoom: 7,
-        maxZoom: null,
+        maxZoom: 16,
         minZoom: null,
         auto_adjust: true,
         auto_zoom: true,

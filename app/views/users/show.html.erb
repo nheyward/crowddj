@@ -1,27 +1,23 @@
-<table>
+<h2>Profile for <%= @user.name %>:</h2>
+<div class="container">
 
-<tr>
-<td>
-	<h2>Profile for <%= @user.name %>:</h2>
-	<% unless @user.venues.empty? %>
-		<table><%= render @venues %></table>
-	<% end %>
-</td>
-
-<td>
+<div class="span-6">
   <b>Name:</b>
-  <%= @user.name %>
-  <b>Email:</b>
-  <%= @user.email %><br/>
-	<% if current_user == @user %>
-		<%= link_to 'Edit Profile', edit_user_path(@user) %>
-	<% end %>
-</td>
-</tr>
+  <%= @user.name %><br />
+  <% if current_user == @user %>
+	<b>Email:</b>
+  	<%= @user.email %><br />
+	<%= link_to 'Edit Profile', edit_user_path(@user) %>
+  <% end %>
+</div>
+	
+<% unless @user.venues.empty? %>
+<div class="span-12">
+	<table><%= render @venues %></table>
+</div>
+<% end %>
 
-</table>
-
-
+</div>
 <% if current_user == @user %>
 	<%= link_to 'Create Venue', new_venue_path %>
 <% end %>

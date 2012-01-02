@@ -1,6 +1,10 @@
 <tr>
 <td><%= image_tag venue.image.url, :size => "50x50", :alt => "Venue image", :class => "round" %></td>
-<td><%= link_to venue.name, venue_path(venue) %>, <%= venue.postcode %></td>
+<td><%= link_to venue.name, venue_path(venue) %>
+<% if venue.town.present? %>
+, <%= venue.town %>
+<% end %>
+</td>
 <td><%= venue.website %></td>
 
 

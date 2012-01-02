@@ -2,9 +2,20 @@
     
 	<%= render 'shared/error_messages', :object => f.object %>
 
+  <div class="field span-6">
+	<%= image_tag @venue.image.url, :size=> "150x150", :alt => "Venue image", :class => "round" %><br />
+ 	<%= f.label :image, 'Change Image' %>
+	<%= f.file_field :image %>
+  </div>
+
+<div class="span-12 last">
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :town, 'Town / City' %><br />
+    <%= f.text_field :town %>
   </div>
   <div class="field">
     <%= f.label :postcode %><br />
@@ -14,14 +25,11 @@
     <%= f.label :website %><br />
     <%= f.text_field :website %>
   </div>
+</div>	
 
-  <div class="field">
-	<%= image_tag @venue.image.url, :size=> "150x150", :alt => "Venue image", :class => "round" %><br />
- 	<%= f.label :image, 'Change Image' %>
-	<%= f.file_field :image %>
-  </div>
 <br />
-  <div class="actions">
-    <%= f.submit "Go"%>
+
+  <div class="actions span-24 ">
+    <%= f.submit "Save"%>
   </div>
 <% end %>
