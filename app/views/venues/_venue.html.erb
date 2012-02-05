@@ -7,6 +7,9 @@
 </td>
 <td><%= venue.website %></td>
 
+<% if venue.respond_to?('distance') %>
+<td><%= number_with_precision venue.distance, :precision => 1 %> miles</td>
+<% end %>
 
 <td>
 <% if current_user == venue.user %>

@@ -20,18 +20,22 @@ class Venue < ActiveRecord::Base
   
   #Googlemap related bits
   acts_as_gmappable :validation => false, :check_process => false
+  geocoded_by :postcode
+  after_validation :geocode 
   
   def gmaps4rails_address
     #describe how to retrieve the address from your model, if you use directly a db column, you can dry your code, see wiki
     "#{self.town}, #{self.postcode}"
   end
   
-  def self.search(search, page)
-    if search
-      paginate :per_page => 25, :page => page,
-               :order => "name", :conditions => ['name LIKE ? OR town LIKE ?', "%#{search}%", "%#{search}%"]
+  def self.search(namesearch, locationsearch, page)
+    if locationsearch
+      page(page).near(locationsearch, 10)
+    elsif namesearch
+      paginate(:per_page => 25, :page => page,
+               :order => "name", :conditions => ['name LIKE ?', "%#{namesearch}%"])
     else
-      paginate :per_page => 25, :page => page, :order => "name"
+      paginate(:per_page => 25, :page => page, :order => "name")
     end
   end
 

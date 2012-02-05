@@ -4,12 +4,18 @@ class VenuesController < ApplicationController
   # GET /venues
   # GET /venues.xml
   def index
-    @venues = Venue.search(params[:search], params[:page])
-    @json = @venues.to_gmaps4rails do |venue, marker|
-      marker.infowindow render_to_string(:partial => "/venues/venue_mapinfo", :locals => { :venue => venue}).gsub(/\n/, '').gsub(/"/, '\"')
-      marker.json "\"id\": #{venue.id}"
-    end
-    
+    @venues = Venue.search(params[:namesearch], params[:locationsearch], params[:page])
+    if @venues.count == 0
+      @json = Venue.all.to_gmaps4rails do |venue, marker|
+        marker.infowindow render_to_string(:partial => "/venues/venue_mapinfo", :locals => { :venue => venue}).gsub(/\n/, '').gsub(/"/, '\"')
+        marker.json "\"id\": #{venue.id}"
+      end
+    elsif
+      @json = @venues.to_gmaps4rails do |venue, marker|
+          marker.infowindow render_to_string(:partial => "/venues/venue_mapinfo", :locals => { :venue => venue}).gsub(/\n/, '').gsub(/"/, '\"')
+          marker.json "\"id\": #{venue.id}"
+      end
+    end     
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @venues }

@@ -11,6 +11,8 @@ gem 'sqlite3', '1.3.3'
 
 gem 'paperclip', '2.4'
 gem 'gmaps4rails'
+gem 'geocoder'
+
 gem 'will_paginate'
 
 group :development do

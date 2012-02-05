@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation
   #Set attributes that arent part of the DB model - Password and confirmation are not in the database, so need to add these:
   attr_accessor :password
-  validates_confirmation_of :password
+  validates_confirmation_of :password #Authentication as per railscast episode 250]
   
   before_save :encrypt_password
   
@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   
   def self.authenticate(email, password)
     user = find_by_email(email)
-    if user && user.password_hash = password+user.password_salt
+    if user && user.password_hash == password + user.password_salt
       user
     else
       nil
